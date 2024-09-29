@@ -2,7 +2,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 
 import {CrowdFundingProvider} from '../../Context/CrowdFunding'
-import Form from "../../Components/Form";
+//import Form from "../../Components/Form";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
