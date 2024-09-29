@@ -5,6 +5,7 @@ import { CrowdFundingContext } from '../../Context/CrowdFunding'
 
 export default function Home() {
   const { createCampaign, error, getCampaigns, currentAccount, connectWallet } = useContext(CrowdFundingContext)
+  //title, description, amount, deadline ==> print out below 
   const [title, setTitle] = useState('')
   const [description, setDescription] = useState('')
   const [amount, setAmount] = useState('')
@@ -13,11 +14,14 @@ export default function Home() {
   const [campaigns, setCampaigns] = useState([])
   const fetchCampaigns = async () => {
     try {
-      const data = await getCampaigns()
-      setCampaigns(data)
+      console.log("123")
+      const data = await getCampaigns() // not working
+      console.log("aaa")
+      setCampaigns(data) // might work
+      console.log("bbb") 
     } catch (error) {
       console.error('Error while fetching campaigns:', error)
-      setErrorMessage('Error while fetching campaigns')
+      setErrorMessage('Error while fetching campaigns') //error message origin
     }
   }
 
@@ -42,14 +46,14 @@ export default function Home() {
       setDeadline('')
       fetchCampaigns()
     } catch (error) {
-      console.error('Error while creating campaign:', error)
-      setErrorMessage(error.message || 'Error while creating campaign')
+      console.error('Error while creating campaign123:', error) //change to empty
+      setErrorMessage(error.message || 'Error while creating campaign234') //change to empty
     }
   }
 
   return (
     <div style={{ maxWidth: '800px', margin: '0 auto', padding: '20px' }}>
-      <h1 style={{ fontSize: '24px', fontWeight: 'bold', marginBottom: '10px' }}>GFG on WEB3</h1>
+      <h1 style={{ fontSize: '42px', fontWeight: 'bold', marginBottom: '10px', color: '#f5c72c', textAlign: 'center' }}>MFund</h1>
       {!currentAccount ? (
         <button
           style={{ backgroundColor: '#007bff', color: 'white', border: 'none', padding: '10px 20px', fontSize: '16px', cursor: 'pointer', marginBottom: '20px' }}
@@ -63,7 +67,7 @@ export default function Home() {
          
         </div>
       )}
-      <h2 style={{ fontSize: '20px', fontWeight: 'bold', marginTop: '20px' }}>Create Campaign</h2>
+      <h2 style={{ fontSize: '20px', fontWeight: 'bold', marginTop: '20px' }}>Make Donation</h2>
       <form onSubmit={handleSubmit} style={{ marginTop: '20px' }}>
         <div style={{ marginBottom: '10px' }}>
           <label style={{ display: 'block', fontSize: '16px', marginBottom: '5px' }}>Title:</label>
@@ -83,7 +87,7 @@ export default function Home() {
           />
         </div>
         <div style={{ marginBottom: '10px' }}>
-          <label style={{ display: 'block', fontSize: '16px', marginBottom: '5px' }}>Amount:</label>
+          <label style={{ display: 'block', fontSize: '16px', marginBottom: '5px' }}>ETH Amount:</label>
           <input
             style={{ width: '100%', padding: '10px' }}
             type='number'
@@ -104,7 +108,7 @@ export default function Home() {
           type='submit'
           style={{ backgroundColor: '#007bff', color: 'white', border: 'none', padding: '10px 20px', fontSize: '16px', cursor: 'pointer', marginTop: '10px' }}
         >
-          Create Campaign
+          Make Donation
         </button>
         {errorMessage && <p style={{ color: 'red', marginTop: '10px' }}>{errorMessage}</p>}
       </form>
@@ -112,7 +116,7 @@ export default function Home() {
       <div>
         {campaigns.map((campaign, index) => (
           <div key={index} style={{ border: '1px solid #ccc', borderRadius: '5px', padding: '10px', marginTop: '20px' }}>
-            <h3 style={{ fontSize: '18px', fontWeight: 'bold' }}>{campaign.title}</h3>
+            <h3 style={{ fontSize: '18px', fontWeight: 'bold' }}>Donations</h3>
             <p>Description: {campaign.description}</p>
             <p>Target Amount: {campaign.target}</p>
             <p>Deadline: {new Date(campaign.deadline).toLocaleDateString()}</p>
